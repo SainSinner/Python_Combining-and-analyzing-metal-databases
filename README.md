@@ -201,3 +201,10 @@ df_melt_df_wire_rod_15Gps_5_5_diam.corrwith(df_melt_df_wire_rod_15Gps_5_5_diam['
 Проверка попарной корреляции всех столбцов с столбцом 'Ψ,%'.
 
 df_melt_df_wire_rod_15Gps_5_5_diam.corrwith(df_melt_df_wire_rod_15Gps_5_5_diam['Ψ,%'])
+
+Строим график зависимости 'σв, Н/мм2' от 'Si, %'.
+
+import matplotlib.pyplot as plt
+plt.scatter(df_melt_df_wire_rod_15Gps_5_5_diam['Si'] ,df_melt_df_wire_rod_15Gps_5_5_diam['σв, Н/мм2'] , color = 'r')
+plt.xlabel('Si, %')
+plt.ylabel('σв, Н/мм2')
