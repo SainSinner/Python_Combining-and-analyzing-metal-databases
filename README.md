@@ -77,4 +77,16 @@ df_melt = df_melt.astype({'O' : 'float64', 'Pb' : 'float64', 'Nb' : 'float64', '
        'Ni' : 'float64', 'Cr' : 'float64', 'Cu' : 'float64', 'Al' : 'float64', 'As' : 'float64', 'N' : 'float64', 'Mo' : 'float64', 'V' : 'float64', 'B' : 'float64', 'Sn' : 'float64', 'Ceq' : 'float64', 'Sn+Mo' : 'float64',
        'Ti' : 'float64', 'W' : 'float64', 'Ca' : 'float64', 'Sb' : 'float64', 'Вес' : 'float64',})
        
+Снова сбрасываем индекс и проверяем смену формата данных столбцов.
+
+df_melt.reset_index(drop=True)
+df_melt.info(verbose=True)
+
+Проводим проверку наличия нулевых и не нулевых значений.
+
+df_melt["Дата отгрузки"].isna()
+
+Заменяем все Nan на 0.
+
+df_melt = df_melt.fillna(value = 0)
 
