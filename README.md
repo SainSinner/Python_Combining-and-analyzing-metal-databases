@@ -212,3 +212,24 @@ import matplotlib.pyplot as plt
 plt.scatter(df_melt_df_wire_rod_15Gps_5_5_diam['Si'] ,df_melt_df_wire_rod_15Gps_5_5_diam['σв, Н/мм2'] , color = 'r')
 plt.xlabel('Si, %')
 plt.ylabel('σв, Н/мм2')
+
+Построим тепловую карту наиболее интересующих нас (согласно теории выплавки).
+
+cols = ['σв, Н/мм2', 'Ψ,%', 'Si', 'Ni', 'Sn', 'Nb']
+sns.heatmap(df_melt_df_wire_rod_15Gps_5_5_diam[cols].corr(),
+            cbar=True,
+            annot=True)
+
+Построим линейную регрессию зависимости 'σв, Н/мм2' от уровня содержания 'Si' (кремния).
+
+cols = ['σв, Н/мм2', 'Si']
+df_LR = df_melt_df_wire_rod_15Gps_5_5_diam[cols]
+df_LR.shape
+X = df_LR[['Si']]
+y = df_LR[['σв, Н/мм2']]
+reg = LinearRegression().fit(X, y)
+plt.scatter(X, y, color = 'red')
+plt.plot(X, reg.predict(X), color = 'blue')
+plt.xlabel(cols[-1:])
+plt.ylabel(cols[:-1])
+plt.show()
