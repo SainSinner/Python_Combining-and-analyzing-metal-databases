@@ -159,3 +159,6 @@ df_melt.set_index('№ плавки', drop=True, append=False, inplace=True, ver
 df_melt_df_wire_rod = df_wire_rod.join(df_melt, on="№ плавки")
 df_melt_df_wire_rod = pd.merge(df_wire_rod, df_melt, left_on="№ плавки", right_index=True, how="left", sort=False)
 
+Проверяем адекватность значений в столбце СТАЛЬ, на предмет правильности заполнения.
+
+df_melt_df_wire_rod['СТАЛЬ'].unique()
