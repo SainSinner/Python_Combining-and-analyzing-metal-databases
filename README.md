@@ -175,3 +175,26 @@ df_melt_df_wire_rod['Dном, мм'].unique()
 
 df_melt_df_wire_rod_15Gps_5_5_diam = df_melt_df_wire_rod_15Gps[df_melt_df_wire_rod_15Gps['Dном, мм'] == 5.5]
 
+Исключаем значения - и изменяем формат данных.
+
+df_melt_df_wire_rod_15Gps_5_5_diam = df_melt_df_wire_rod_15Gps_5_5_diam.loc[df_melt_df_wire_rod_15Gps_5_5_diam['σв, Н/мм2'] != "-"]
+df_melt_df_wire_rod_15Gps_5_5_diam = df_melt_df_wire_rod_15Gps_5_5_diam.astype({'σв, Н/мм2' : 'float64'})
+df_melt_df_wire_rod_15Gps_5_5_diam = df_melt_df_wire_rod_15Gps_5_5_diam.loc[df_melt_df_wire_rod_15Gps_5_5_diam['Ψ,%'] != "-"]
+df_melt_df_wire_rod_15Gps_5_5_diam = df_melt_df_wire_rod_15Gps_5_5_diam.astype({'Ψ,%' : 'float64'})
+
+Удаляем значения строки без химического состава стали по признаку: удалить все строки в столбце 'C', без данных в этом стотблце плавка стсали не существует.
+
+df_melt_df_wire_rod_15Gps_5_5_diam = df_melt_df_wire_rod_15Gps_5_5_diam.dropna(axis=0, how='any', subset=['C'])
+
+Проверяем ковариацию двух столбцов, а именно механического свойсвта: временного сопротивления разрыву проволоки и химического элемента: С (углерод).
+
+np.cov(df_melt_df_wire_rod_15Gps_5_5_diam['σв, Н/мм2'],df_melt_df_wire_rod_15Gps_5_5_diam['C'])
+
+Описательная статистика полученного DF.
+
+df_melt_df_wire_rod_15Gps_5_5_diam.describe()
+
+Проверка попарной корреляции всех столбцов с столбцом 'σв, Н/мм2'.
+
+df_melt_df_wire_rod_15Gps_5_5_diam.corrwith(df_melt_df_wire_rod_15Gps_5_5_diam['σв, Н/мм2'])
+
