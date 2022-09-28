@@ -69,3 +69,12 @@ df_melt["Дата отгрузки"] = df_melt["Дата отгрузки"].fill
 Удаляем последнюю строку DF по причине отсутсвия в ней данных.
 
 df_melt.drop(df_melt.index[-1], axis=0, inplace=True)
+
+Так как для дальнейших манипуляций необходимо изменить размерность данных, указываем интрересующим нам столбцам верные размерности.
+
+df_melt = df_melt.astype({'Дата отгрузки' : 'int64', '№ плавки' : 'int64'})
+df_melt = df_melt.astype({'O' : 'float64', 'Pb' : 'float64', 'Nb' : 'float64', 'C' : 'float64', 'Si' : 'float64', 'Mn' : 'float64', 'P' : 'float64', 'S' : 'float64',
+       'Ni' : 'float64', 'Cr' : 'float64', 'Cu' : 'float64', 'Al' : 'float64', 'As' : 'float64', 'N' : 'float64', 'Mo' : 'float64', 'V' : 'float64', 'B' : 'float64', 'Sn' : 'float64', 'Ceq' : 'float64', 'Sn+Mo' : 'float64',
+       'Ti' : 'float64', 'W' : 'float64', 'Ca' : 'float64', 'Sb' : 'float64', 'Вес' : 'float64',})
+       
+
