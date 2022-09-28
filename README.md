@@ -154,3 +154,8 @@ df_wire_rod = df_wire_rod.astype({'Unnamed: 4' : 'object'})
 
 df_melt.set_index('№ плавки', drop=True, append=False, inplace=True, verify_integrity=False)
 
+Выполняем слияние 2-х DF плавки и катанки.
+
+df_melt_df_wire_rod = df_wire_rod.join(df_melt, on="№ плавки")
+df_melt_df_wire_rod = pd.merge(df_wire_rod, df_melt, left_on="№ плавки", right_index=True, how="left", sort=False)
+
