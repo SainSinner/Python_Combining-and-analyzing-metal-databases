@@ -150,3 +150,7 @@ df_wire_rod = df_wire_rod.loc[df_wire_rod['№ плавки'] != "-"]
 df_wire_rod = df_wire_rod.astype({'№ плавки' : 'int64'})
 df_wire_rod = df_wire_rod.astype({'Unnamed: 4' : 'object'})
 
+Удаляем столбец № плавки и заменяем индекс столбцом № плавки.
+
+df_melt.set_index('№ плавки', drop=True, append=False, inplace=True, verify_integrity=False)
+
