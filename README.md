@@ -107,4 +107,37 @@ df_melt.sort_values(by=['№ плавки'])
 
 df_melt.drop_duplicates(inplace = True)
 
+Присваиваем новый индекс через столбец "№ плавки".
+
+df_melt.set_index('№ плавки',drop = False)
+
+Обабатываем DF по катанке.
+
+df = pd.read_excel('Data_wire_rod.xlsx', sheet_name=None)
+df['катанка'].rename(columns = {'Unnamed: 0' : 'ИМЯ','Unnamed: 5' : 'ПЛАВКА','Unnamed: 6' : 'СТАЛЬ','Unnamed: 7' : 'НД','Unnamed: 8' : 'Dном, мм','Unnamed: 9' : 'Dфак, мм','Unnamed: 10' : 'σв, Н/мм2','Unnamed: 11' : 'σт, Н/мм2','Unnamed: 12' : 'σв/σт','Unnamed: 13' : 'δmax, %','Unnamed: 14' : 'Ψ,%','Unnamed: 15' : 'δ5, %','Unnamed: 16' : 'δ10, %','Unnamed: 17' : 'окалина, %','Unnamed: 18' : 'Изгиб','Unnamed: 19' : 'осадка','Unnamed: 20' : 'перегиб','Unnamed: 21' : 'ПРИМ','Unnamed: 22' : 'ДАТА','Unnamed: 23' : 'ЦЕЛЬ','Unnamed: 24' : 'оператор','Unnamed: 25' : 'протокол','Unnamed: 26' : '№заказа','Unnamed: 27' : 'σв, МПа','Unnamed: 28' : 'Ψ, %','Unnamed: 29' : 'окалина','Unnamed: 30' : 'овал','Unnamed: 31' : 'Бригада №','Unnamed: 32' : 'Приложение по выплавке',}, inplace = True)
+df['катанка'] = df['катанка'].drop(index=[0, 1, 2])
+df['катанка'] = df['катанка'].reset_index(drop=True)
+df_wire_rod = df['катанка']
+
+Обрабатываем DF по неоцинкованной проволоке.
+
+df_wire = pd.read_excel('Data_wire.xlsx', sheet_name=None)
+df_wire['неоц'].rename(columns = {'ИМЯ' : 'стан', 'Unnamed: 2' : 'бухта', 'Unnamed: 3': '№', 'повторы' : 'σв', 'Unnamed: 21' : 'δ' }, inplace = True)
+df_wire['неоц'].drop(['Unnamed: 23', 'Unnamed: 24', 'Unnamed: 25', 'Unnamed: 26', 'Unnamed: 27', 'Unnamed: 28', 'Unnamed: 29'], axis = 1, inplace = True)
+df_wire['неоц'] = df_wire['неоц'].drop(index=[0])
+df_wire['неоц'] = df_wire['неоц'].reset_index(drop=True)
+df_wire = df_wire['неоц']
+
+Меняем местами столбцы и присваиваем новые названия столбцам DF по катанке.
+
+df_wire_rod = df_wire_rod [['ПЛАВКА', 'ИМЯ', 'Unnamed: 1', 'Unnamed: 2', 'Unnamed: 3', 'Unnamed: 4', 'СТАЛЬ', 'НД', 'Dном, мм', 'Dфак, мм', 'σв, Н/мм2', 'σт, Н/мм2',
+       'σв/σт', 'δmax, %', 'Ψ,%', 'δ5, %', 'δ10, %', 'окалина, %', 'Изгиб',
+       'осадка', 'перегиб', 'ПРИМ', 'ДАТА', 'ЦЕЛЬ', 'оператор', 'протокол',
+       '№заказа', 'σв, МПа', 'Ψ, %', 'окалина', 'овал', 'Бригада №',
+       'Приложение по выплавке']]
+df_wire_rod.rename(columns = {'ПЛАВКА' : '№ плавки'}, inplace = True)
+df_wire_rod.rename(columns = {'ИМЯ' : '№ образца'}, inplace = True)
+df_wire_rod.rename(columns = {'Unnamed: 1' : 'Линия проката'}, inplace = True)
+df_wire_rod.rename(columns = {'Unnamed: 3' : 'Начало/конец образца'}, inplace = True)
+
 
