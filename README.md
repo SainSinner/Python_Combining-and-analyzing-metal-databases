@@ -198,3 +198,6 @@ df_melt_df_wire_rod_15Gps_5_5_diam.describe()
 
 df_melt_df_wire_rod_15Gps_5_5_diam.corrwith(df_melt_df_wire_rod_15Gps_5_5_diam['σв, Н/мм2'])
 
+Проверка попарной корреляции всех столбцов с столбцом 'Ψ,%'.
+
+df_melt_df_wire_rod_15Gps_5_5_diam.corrwith(df_melt_df_wire_rod_15Gps_5_5_diam['Ψ,%'])
