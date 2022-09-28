@@ -70,7 +70,7 @@ df_melt["Дата отгрузки"] = df_melt["Дата отгрузки"].fill
 
 df_melt.drop(df_melt.index[-1], axis=0, inplace=True)
 
-Так как для дальнейших манипуляций необходимо изменить размерность данных, указываем интрересующим нам столбцам верные размерности.
+Так как для дальнейших манипуляций необходимо изменить размерность данных, указываем интрересующим нам столбцам верные форматы данных.
 
 df_melt = df_melt.astype({'Дата отгрузки' : 'int64', '№ плавки' : 'int64'})
 df_melt = df_melt.astype({'O' : 'float64', 'Pb' : 'float64', 'Nb' : 'float64', 'C' : 'float64', 'Si' : 'float64', 'Mn' : 'float64', 'P' : 'float64', 'S' : 'float64',
@@ -140,4 +140,13 @@ df_wire_rod.rename(columns = {'ИМЯ' : '№ образца'}, inplace = True)
 df_wire_rod.rename(columns = {'Unnamed: 1' : 'Линия проката'}, inplace = True)
 df_wire_rod.rename(columns = {'Unnamed: 3' : 'Начало/конец образца'}, inplace = True)
 
+Избавляемся от незаполненных № плавок и неправильнозаполненных значений в DF катанки.
+
+df_wire_rod.loc[(df_wire_rod['№ плавки'] == "222160*9"), '№ плавки'] = "-"
+df_wire_rod = df_wire_rod.loc[df_wire_rod['№ плавки'] != "-"]
+
+Так как для дальнейших манипуляций необходимо изменить размерность данных, указываем интрересующим нам столбцам верные форматы данных.
+
+df_wire_rod = df_wire_rod.astype({'№ плавки' : 'int64'})
+df_wire_rod = df_wire_rod.astype({'Unnamed: 4' : 'object'})
 
