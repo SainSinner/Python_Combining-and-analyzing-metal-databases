@@ -162,3 +162,16 @@ df_melt_df_wire_rod = pd.merge(df_wire_rod, df_melt, left_on="№ плавки",
 Проверяем адекватность значений в столбце СТАЛЬ, на предмет правильности заполнения.
 
 df_melt_df_wire_rod['СТАЛЬ'].unique()
+
+Выводим в отдельный DF данные с значением 15Гпс в столбце СТАЛЬ.
+
+df_melt_df_wire_rod_15Gps = df_melt_df_wire_rod[df_melt_df_wire_rod['СТАЛЬ'] == '15Гпс']
+
+Проверяем адекватность введения значений в столбце Диаметр проволоки.
+
+df_melt_df_wire_rod['Dном, мм'].unique()
+
+Выводим в отдельный DF данные с значением 15Гпс в столбце СТАЛЬ и данные с значением 5.5 в столбце Dном, мм.
+
+df_melt_df_wire_rod_15Gps_5_5_diam = df_melt_df_wire_rod_15Gps[df_melt_df_wire_rod_15Gps['Dном, мм'] == 5.5]
+
