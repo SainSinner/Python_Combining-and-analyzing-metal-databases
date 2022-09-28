@@ -15,6 +15,10 @@
 
 Для адекватного отображения названия столбцов применил следующее переименование для всех рассматриваемых месяцв.
 
+import pandas as pd
+import numpy as np
+df = pd.read_excel('Data_melt.xlsx', sheet_name=None)
+
 df['01-31.01'].rename(columns = {'Химический состав' : df['01-31.01'].iat[0,6], 
                                  'Unnamed: 7' : df['01-31.01'].iat[0,7], 
                                  'Unnamed: 8' : df['01-31.01'].iat[0,8], 
